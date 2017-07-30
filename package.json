@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "Alexander Grishchuk",
-  "license": "MIT",
+  "private": true,
   "scripts": {
     "dev": "nodemon index.js --ignore client"
   },
