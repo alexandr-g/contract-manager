@@ -22,6 +22,7 @@ class CategoryCreate extends Component {
   render() {
     return (
       <div>
+        <Link to="/">Back</Link>
         <h3>Create a new category</h3>
         <form onSubmit={this.onSubmit.bind(this)}>
           <label>Category Name:</label>
