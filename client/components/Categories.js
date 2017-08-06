@@ -23,6 +23,7 @@ class Categories extends Component {
 
     return (
       <div>
+        <h2>Categories</h2>
         <ul className="collection">
           {this.renderCategories()}
         </ul>
