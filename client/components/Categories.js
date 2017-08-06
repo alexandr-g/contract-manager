@@ -7,7 +7,9 @@ import mutation from '../mutations/deleteCategory'
 
 class Categories extends Component {
   onCategoryDelete(id) {
-    this.props.mutate({ variables: { id } })
+    this.props
+      .mutate({ variables: { id } })
+      .then(() => this.props.data.refetch())
   }
 
   renderCategories() {
