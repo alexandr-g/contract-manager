@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 import { Link } from 'react-router'
+import query from '../queries/fetchCategories'
 
 class Categories extends Component {
   renderCategories() {
@@ -34,14 +35,5 @@ class Categories extends Component {
     )
   }
 }
-
-const query = gql`
-  {
-    categories {
-      id
-      name
-    }
-  }
-`
 
 export default graphql(query)(Categories)
