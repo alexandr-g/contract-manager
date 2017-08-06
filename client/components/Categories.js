@@ -3,21 +3,30 @@ import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 import { Link } from 'react-router'
 import query from '../queries/fetchCategories'
+import mutation from '../mutations/deleteCategory'
 
 class Categories extends Component {
+  onCategoryDelete(id) {
+    this.props.mutate({ variables: { id } })
+  }
+
   renderCategories() {
-    return this.props.data.categories.map(category => {
+    return this.props.data.categories.map(({ id, name }) => {
       return (
-        <li key={category.id} className="collection-item">
-          {category.name}
+        <li key={id} className="collection-item">
+          {name}
+          <i
+            className="material-icons"
+            onClick={() => this.onCategoryDelete(id)}
+          >
+            delete
+          </i>
         </li>
       )
     })
   }
 
   render() {
-    console.log(this.props)
-
     if (this.props.data.loading) {
       return <div>loading...</div>
     }
@@ -36,4 +45,4 @@ class Categories extends Component {
   }
 }
 
-export default graphql(query)(Categories)
+export default graphql(mutation)(graphql(query)(Categories))
