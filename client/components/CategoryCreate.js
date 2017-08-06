@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
+import { graphql } from 'react-apollo'
 
 class CategoryCreate extends Component {
   constructor(props) {
@@ -9,7 +10,13 @@ class CategoryCreate extends Component {
   }
 
   onSubmit(event) {
-    event.preventDefaut()
+    event.preventDefault()
+
+    this.props.mutate({
+      variables: {
+        name: this.state.name,
+      },
+    })
   }
 
   render() {
@@ -29,11 +36,12 @@ class CategoryCreate extends Component {
 }
 
 const mutation = gql`
-  mutation {
-    addCategory(name: "insurance") {
+  mutation AddCategory($name: String) {
+    addCategory(name: $name) {
       id
+      name
     }
   }
 `
 
-export default CategoryCreate
+export default graphql(mutation)(CategoryCreate)
