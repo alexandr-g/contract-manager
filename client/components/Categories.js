@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
+import { Link } from 'react-router'
 
 class Categories extends Component {
   renderCategories() {
@@ -21,9 +22,14 @@ class Categories extends Component {
     }
 
     return (
-      <ul className="collection">
-        {this.renderCategories()}
-      </ul>
+      <div>
+        <ul className="collection">
+          {this.renderCategories()}
+        </ul>
+        <Link to="categories/new" className="btn-floating btn-large red right">
+          <i className="material-icons">add</i>
+        </Link>
+      </div>
     )
   }
 }
