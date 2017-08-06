@@ -15,7 +15,7 @@ const Root = () => {
       <Router history={hashHistory}>
         <Route path="/" component={App}>
           <IndexRoute component={Categories} />
-          <Route path="category/new" component={CategoryCreate} />
+          <Route path="categories/new" component={CategoryCreate} />
         </Route>
       </Router>
     </ApolloProvider>
