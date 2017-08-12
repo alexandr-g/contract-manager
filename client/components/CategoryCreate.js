@@ -2,44 +2,18 @@ import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 import { Link, hashHistory } from 'react-router'
+import { compose, withState, withHandlers } from 'recompose'
 import query from '../queries/fetchCategories'
 
-class CategoryCreate extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = { name: '' }
-  }
-
-  onSubmit(event) {
-    event.preventDefault()
-
-    this.props
-      .mutate({
-        variables: {
-          name: this.state.name,
-        },
-        refetchQueries: [{ query }],
-      })
-      .then(() => hashHistory.push('/'))
-  }
-
-  render() {
-    return (
-      <div>
-        <Link to="/">Back</Link>
-        <h3>Create a new category</h3>
-        <form onSubmit={this.onSubmit.bind(this)}>
-          <label>Category Name:</label>
-          <input
-            onChange={event => this.setState({ name: event.target.value })}
-            value={this.state.name}
-          />
-        </form>
-      </div>
-    )
-  }
-}
+const CategoryCreate = ({ name, setName, onChange, onSubmit }) =>
+  <div>
+    <Link to="/">Back</Link>
+    <h3>Create a new category</h3>
+    <form onSubmit={onSubmit}>
+      <label>Category Name:</label>
+      <input value={name} onChange={onChange} />
+    </form>
+  </div>
 
 const mutation = gql`
   mutation AddCategory($name: String) {
@@ -50,4 +24,16 @@ const mutation = gql`
   }
 `
 
-export default graphql(mutation)(CategoryCreate)
+export default compose(
+  graphql(mutation),
+  withState('name', 'setName', ({ value }) => value),
+  withHandlers({
+    onChange: ({ setName }) => ({ target }) => setName(target.value),
+    onSubmit: ({ mutate, name }) => event => {
+      event.preventDefault()
+      mutate({ variables: { name }, refetchQueries: [{ query }] }).then(() =>
+        hashHistory.push('/')
+      )
+    },
+  })
+)(CategoryCreate)
