@@ -11,7 +11,7 @@ const CategoryCreate = ({ name, setName, onChange, onSubmit }) =>
     <h3>Create a new category</h3>
     <form onSubmit={onSubmit}>
       <label>Category Name:</label>
-      <input value={name} onChange={onChange} />
+      <input autoFocus value={name} onChange={onChange} />
     </form>
   </div>
 
