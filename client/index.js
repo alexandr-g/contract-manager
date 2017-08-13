@@ -7,6 +7,7 @@ import { ApolloProvider } from 'react-apollo'
 import App from './components/App'
 import Categories from './components/Categories'
 import CategoryCreate from './components/CategoryCreate'
+import CategoryDetails from './components/CategoryDetails'
 
 const client = new ApolloClient({})
 
@@ -17,6 +18,7 @@ const Root = () => {
         <Route path="/" component={App}>
           <IndexRoute component={Categories} />
           <Route path="categories/new" component={CategoryCreate} />
+          <Route path="categories/:id" component={CategoryDetails} />
         </Route>
       </Router>
     </ApolloProvider>
