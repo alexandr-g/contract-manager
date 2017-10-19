@@ -5,10 +5,12 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const schema = require('./schema/schema')
 
+require('dotenv').config()
+
 const app = express()
 
 // Replace with your mongoLab URI
-const MONGO_URI = 'mongodb://alex:alex@ds149122.mlab.com:49122/contract-manager'
+const MONGO_URI = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/contract-manager`
 if (!MONGO_URI) {
   throw new Error('You must provide a MongoLab URI')
 }
