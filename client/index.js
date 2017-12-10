@@ -2,14 +2,17 @@ import './style/style.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Router, Route, hashHistory, IndexRoute } from 'react-router'
-import ApolloClient from 'apollo-client'
+import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-client-preset'
 import { ApolloProvider } from 'react-apollo'
 import App from './components/App'
 import Categories from './components/Categories'
 import CategoryCreate from './components/CategoryCreate'
 import CategoryDetails from './components/CategoryDetails'
 
-const client = new ApolloClient({})
+const client = new ApolloClient({
+  link: new HttpLink(),
+  cache: new InMemoryCache()
+})
 
 const Root = () => {
   return (
